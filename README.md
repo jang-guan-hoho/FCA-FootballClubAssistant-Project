@@ -4,7 +4,7 @@
 
 ## 프로젝트 주제 정하기
 <details>
-<summary>헬스장 리워드, 게임 시스템/이벤트</summary>
+<summary>1.헬스장 리워드, 게임 시스템/이벤트</summary>
 <div markdown="1">
     
     1. 아이디어는 무엇이고, 무엇을 만들고자 하는가? 
