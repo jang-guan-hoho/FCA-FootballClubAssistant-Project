@@ -1,7 +1,7 @@
 # SSAFY-1st-PROJECT
 
-|### 프로젝트 맴버 |
-|||
+|### 프로젝트 맴버 ||
+|:--:|:--:|
 |탁인혁| 유호성|
 |[github](https://github.com/InhyukTak)|[github](https://github.com/jang-guan-hoho)|
 
