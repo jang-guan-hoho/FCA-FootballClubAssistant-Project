@@ -2,16 +2,16 @@
 
 <table style="border: 2px;" align="center">
   <tr>
-    <td colspan="2"><h3>프로젝트 맴버</h3></td>
+    <td colspan="2" align="center"><h3>프로젝트 맴버</h3></td>
   </tr><tr>
     <td> <img src="img\img1.PNG" width="160" height="160"></td>
     <td> <img src="img\img2.jpg" width="160" height="160"> </td>
   </tr><tr>
-    <td> 탁인혁 </td>
-    <td> 유호성 </td>
+    <td align="center"> 탁인혁 </td>
+    <td align="center"> 유호성 </td>
   </tr><tr>
-    <td> <a href="https://github.com/InhyukTak">github</a></td>
-    <td> <a href="https://github.com/jang-guan-hoho">github</a> </td>
+    <td align="center"> <a href="https://github.com/InhyukTak">github</a></td>
+    <td align="center"> <a href="https://github.com/jang-guan-hoho">github</a> </td>
   </tr>
 </table>
 
