@@ -218,7 +218,7 @@
 </details>
 
 <details>
-<summary><strong>5.단체 스포츠 운영 시스템 (PICK)</strong></summary>
+<summary><strong>5.단체 스포츠 운영 시스템 (결정!)</strong></summary>
 <div markdown="1">
     
     1. 아이디어는 무엇이고, 무엇을 만들고자 하는가? 
