@@ -1,13 +1,8 @@
 # SSAFY-1st-PROJECT
 
-|### 프로젝트 맴버 ||
-|:--:|:--:|
-|탁인혁| 유호성|
-|[github](https://github.com/InhyukTak)|[github](https://github.com/jang-guan-hoho)|
-
 <table style="border: 2px;">
   <tr>
-    <td colspan="2"><h2>프로젝트 맴버</h2></td>
+    <td colspan="2"><h3>프로젝트 맴버</h3></td>
   </tr><tr>
     <td> 탁인혁 </td>
     <td> 유호성 </td>
