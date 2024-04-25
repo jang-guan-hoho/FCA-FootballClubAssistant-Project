@@ -7,17 +7,15 @@
 
 <table style="border: 2px;">
   <th>
-    <tr> ### 프로젝트 맴버</tr>
+    <td colspan="2"> ### 프로젝트 맴버</td>
   </th><tr>
-    <td colspan="2"> 컨텐츠 내용4 </td>
-  </tr><tr>
     <td> 탁인혁 </td>
     <td> 유호성 </td>
   </tr><tr>
     <td> 탁인혁 </td>
     <td> 유호성 </td>
   </tr><tr>
-    <td> [github](https://github.com/InhyukTak) </td>
+    <td> <a href="[https://github.com/jang-guan-hoho](https://github.com/InhyukTak)">github</a></td>
     <td> <a href="https://github.com/jang-guan-hoho">github</a> </td>
   </tr>
 </table>
