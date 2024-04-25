@@ -1,4 +1,4 @@
-# SSAFY-1st-PROJECT
+# SCM(SportClubManager)
 
 <table style="border: 2px;" align="center">
   <tr>
