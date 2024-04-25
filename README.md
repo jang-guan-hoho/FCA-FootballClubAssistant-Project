@@ -4,7 +4,7 @@
   <tr>
     <td colspan="2"><h3>프로젝트 맴버</h3></td>
   </tr><tr>
-    <td> <img src="C:\Users\SSAFY\Desktop\img\인혁 프로필.jpg" width="720" height="480"></td>
+    <td> <img src="C:\Users\SSAFY\Desktop\img\인혁프로필.jpg" width="360" height="240"></td>
     <td> 유호성 </td>
   </tr><tr>
     <td> 탁인혁 </td>
