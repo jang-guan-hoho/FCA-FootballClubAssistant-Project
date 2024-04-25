@@ -6,9 +6,9 @@
 |[github](https://github.com/InhyukTak)|[github](https://github.com/jang-guan-hoho)|
 
 <table style="border: 2px;">
-  <th>
+  <tr>
     <td colspan="2"> ### 프로젝트 맴버</td>
-  </th><tr>
+  </tr><tr>
     <td> 탁인혁 </td>
     <td> 유호성 </td>
   </tr><tr>
