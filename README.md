@@ -5,6 +5,23 @@
 |탁인혁| 유호성|
 |[github](https://github.com/InhyukTak)|[github](https://github.com/jang-guan-hoho)|
 
+<table style="border: 2px;">
+  <th>
+    <tr> ### 프로젝트 맴버</tr>
+  </th><tr>
+    <td colspan="2"> 컨텐츠 내용4 </td>
+  </tr><tr>
+    <td> 탁인혁 </td>
+    <td> 유호성 </td>
+  </tr><tr>
+    <td> 탁인혁 </td>
+    <td> 유호성 </td>
+  </tr><tr>
+    <td> [github](https://github.com/InhyukTak) </td>
+    <td> [github](https://github.com/jang-guan-hoho) </td>
+  </tr>
+</table>
+
 ## 프로젝트 주제 정하기(24.04.22~24.04.29)
 <details>
 <summary>1.헬스장 리워드, 게임 시스템/이벤트</summary>
