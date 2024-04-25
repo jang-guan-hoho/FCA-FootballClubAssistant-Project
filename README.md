@@ -15,7 +15,7 @@
     <td> 탁인혁 </td>
     <td> 유호성 </td>
   </tr><tr>
-    <td> <a href="[https://github.com/jang-guan-hoho](https://github.com/InhyukTak)">github</a></td>
+    <td> <a href="https://github.com/InhyukTak">github</a></td>
     <td> <a href="https://github.com/jang-guan-hoho">github</a> </td>
   </tr>
 </table>
