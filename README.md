@@ -2,7 +2,7 @@
 
 <table style="border: 2px;" align="center">
   <tr>
-    <td colspan="2" align="center"><h3>프로젝트 맴버</h3></td>
+    <th colspan="2" align="center"><h3>프로젝트 맴버</h3></th>
   </tr><tr>
     <td> <img src="img\img1.PNG" width="160" height="160"></td>
     <td> <img src="img\img2.jpg" width="160" height="160"> </td>
