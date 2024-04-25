@@ -18,7 +18,7 @@
     <td> 유호성 </td>
   </tr><tr>
     <td> [github](https://github.com/InhyukTak) </td>
-    <td> [github](https://github.com/jang-guan-hoho) </td>
+    <td> <a href="https://github.com/jang-guan-hoho">github</a> </td>
   </tr>
 </table>
 
