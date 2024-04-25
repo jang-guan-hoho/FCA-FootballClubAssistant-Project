@@ -1,6 +1,9 @@
 # SSAFY-1st-PROJECT
 
-### 프로젝트 맴버 : [탁인혁](https://github.com/InhyukTak), [유호성](https://github.com/jang-guan-hoho)
+|### 프로젝트 맴버 |
+|||
+|탁인혁| 유호성|
+|[github](https://github.com/InhyukTak)|[github](https://github.com/jang-guan-hoho)|
 
 ## 프로젝트 주제 정하기(24.04.22~24.04.29)
 <details>
