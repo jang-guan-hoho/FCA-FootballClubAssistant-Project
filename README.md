@@ -1,6 +1,6 @@
 # SSAFY-1st-PROJECT
 
-<table style="border: 2px; margin-left:auto; margin-right:auto; text-align: center;">
+<table style="border: 2px;" align="center">
   <tr>
     <td colspan="2"><h3>프로젝트 맴버</h3></td>
   </tr><tr>
