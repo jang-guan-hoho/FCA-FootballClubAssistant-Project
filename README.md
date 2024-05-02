@@ -267,5 +267,5 @@
 </details>
 
 
-## Step1 시나리오
+## Step01 시나리오
 <img src="projectImage\UserScenario.png" width="480" height="640">
