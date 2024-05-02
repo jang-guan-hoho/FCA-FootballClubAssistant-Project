@@ -265,3 +265,7 @@
     만약 만족스럽고 성공적으로 마무리가 된다면 기업의 사이트 프로젝트 정도로 발전시킬 수 있을것이다.
 </div>
 </details>
+
+
+## Step1 시나리오
+<img src="projectImage\UserScenario.PNG" width="640" height="480">
