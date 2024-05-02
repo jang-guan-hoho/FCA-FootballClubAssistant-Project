@@ -268,4 +268,4 @@
 
 
 ## Step1 시나리오
-<img src="projectImage\UserScenario.PNG" width="640" height="480">
+<img src="projectImage\UserScenario.png" width="480" height="640">
