@@ -14,8 +14,8 @@ public class SwaggerConfig {
 	  public OpenAPI springShopOpenAPI() {
 	      return new OpenAPI()
 	              .info(new Info()
-	            		  .title("SBB REST API")
-	            		  .description("게시판 REST API입니다.")
+	            		  .title("FCA REST API")
+	            		  .description("Football Club Assistance REST API")
 	            		  .version("0.0.1")
 	            		  .license(new License().name("SSAFY").url("https://www.ssafy.com"))
 	              );
