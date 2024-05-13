@@ -12,16 +12,10 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Club DTO")
-public class Club {
-	private int clubId;
-	private String name;
-	private int maxMember;
-	private String content;
-	private int fee;
-	private String clubImg;
-	private String logo;
-	private int account;
-	private String bank;
-	private String region;
+@Schema(description = "Receipt DTO")
+public class Receipt {
+	private int receiptId;
+	private String item;
+	private int price;
+	private int scheduleId;
 }

@@ -1,5 +1,7 @@
 package com.fca.model.dto;
 
+import java.util.Date;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,16 +14,15 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Club DTO")
-public class Club {
-	private int clubId;
-	private String name;
-	private int maxMember;
+@Schema(description = "Board DTO")
+public class Board {
+	private int boardId;
+	private String title;
 	private String content;
-	private int fee;
-	private String clubImg;
-	private String logo;
-	private int account;
-	private String bank;
-	private String region;
+	private String category;
+	private Date date;
+	private int userId;
+	private int clubId;
+	private int viewCnt;
+	private String file;
 }
