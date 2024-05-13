@@ -271,4 +271,5 @@
 <img src="projectImage\UserScenario.png" width="480" height="640">
 
 ## 목업(by Figma 5.7~5.10)
-<img src="projectImage\mockup.PNG" width="480" height="640">
+<a href="https://github.com/InhyukTak">github</a>
+<img src="projectImage\mockup\mainPage.PNG" width="480" height="640">
