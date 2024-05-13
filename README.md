@@ -269,3 +269,5 @@
 
 ## Step01 시나리오
 <img src="projectImage\UserScenario.png" width="480" height="640">
+
+## 목업(by Figma 5.7~5.10)
