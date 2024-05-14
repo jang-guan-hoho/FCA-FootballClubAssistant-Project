@@ -15,6 +15,7 @@ CREATE TABLE `club` (
 	`account` INT NOT NULL,
 	`bank` VARCHAR(20) NOT NULL,
 	`region` VARCHAR(40) NOT NULL,
+    `money` int NULL DEFAULT 0,
 	PRIMARY KEY (`club_id`)
 );
 CREATE TABLE `user` (
@@ -55,7 +56,7 @@ CREATE TABLE `member` (
 	`club_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
 	`position` VARCHAR(20) NOT NULL,
-	`billing_key` VARCHAR(255) NOT NULL,
+	-- `billing_key` VARCHAR(255) NOT NULL,
 	PRIMARY KEY (`member_id`),
 	FOREIGN KEY (`club_id`) REFERENCES `club`(`club_id`),
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)

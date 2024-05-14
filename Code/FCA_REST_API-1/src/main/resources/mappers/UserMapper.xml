@@ -3,4 +3,28 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fca.model.dao.UserDao">
+    <!-- 내정보 조회 -->
+    <select id="goMyPage" parameterType="int" resultType="Board">
+        SELECT *
+        FROM user
+        WHERE userId = #{userId};
+    </select>
+
+    <!-- 회원 탈퇴 -->
+    <delete id="deleteUser">
+        DELETE FROM user
+        WHERE userId = #{userId}
+    </delete>
+
+    <!-- 내정보 수정 -->
+    <update id="updateUser" parameterType="User">
+        UPDATE user
+        SET intro = #{intro}, profile = #{profile}
+        WHERE userId = #{userId}
+    </update>
+    
+    <insert id="doSginUp" parameterType="User">
+        INSERT INTO user (name,email, password,gender,birth, intro, profile)
+        VALUES (#{name}, #{email}, #{password}, #{gender}, #{birth}, #{intro}, #{profile})
+    </insert>
 </mapper>

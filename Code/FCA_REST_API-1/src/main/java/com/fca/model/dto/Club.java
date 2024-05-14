@@ -24,4 +24,5 @@ public class Club {
 	private int account;
 	private String bank;
 	private String region;
+	private int money;
 }

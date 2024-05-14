@@ -28,10 +28,10 @@ public class BoardRestController {
     }
     
     // 클럽 게시판 상세
-    @GetMapping("/club/{clubId}/board/{boardId}")
-    public ResponseEntity<?> clubBoardDetail(){
-        return new ResponseEntity<Void>(HttpStatus.OK);
-    }
+//    @GetMapping("/club/{clubId}/board/{boardId}")
+//    public ResponseEntity<?> clubBoardDetail(){
+//        return new ResponseEntity<Void>(HttpStatus.OK);
+//    }
     
     // 클럽 게시판 수정
     @PutMapping("/club/{clubId}/board/{boardId}")
