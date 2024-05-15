@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fca.model.dto.Club;
 import com.fca.model.dto.Member;
+import com.fca.model.dto.Receipt;
 import com.fca.model.service.ClubService;
 import com.fca.model.service.ClubServiceImpl;
 
@@ -75,9 +76,9 @@ public class ClubRestController {
     
     // 회비내역 -> 개어려움 생각 좀 정리하고 할 것
     @GetMapping("/club/{clubId}/receipt")
-    public ResponseEntity<?> goClubRecepit(){
-    	
-        return new ResponseEntity<Void>(HttpStatus.OK);
+    public ResponseEntity<?> goClubReceipt(@PathVariable("clubId") int clubId, int year, int month){
+    	List<Map<String, Integer>> receiptList = clubService.getClubReceipt(clubId, year, month);
+        return new ResponseEntity<>(receiptList, HttpStatus.OK);
     }
     
     // 클럽 생성폼 이동
@@ -88,8 +89,8 @@ public class ClubRestController {
     
     // 클럽 생성 
     @PostMapping("/club")
-    public ResponseEntity<?> clubCreate(@RequestBody Club club){
-    	clubService.createClub(club); // Club 컬럼 생성하면서 동시에 Member 컬럼(클럽장)도 생성해야함
+    public ResponseEntity<?> clubCreate(@RequestBody Club club, int userId){
+    	clubService.createClub(club, userId); // Club 컬럼 생성하면서 동시에 Member 컬럼(클럽장)도 생성해야함
     	Club newClub = clubService.getNewClub(); // 방금 생성한 클럽 정보 가져와야함
         return new ResponseEntity<>(newClub, HttpStatus.OK);
     }
@@ -138,6 +139,7 @@ public class ClubRestController {
     //클럽 회비 관리 -> 어떤 데이터가 필요한지 좀 더 생각해보자..
     @GetMapping("/club/{clubId}/manage/receipt")
     public ResponseEntity<?> goClubManageReceipt(){
+    	
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 }

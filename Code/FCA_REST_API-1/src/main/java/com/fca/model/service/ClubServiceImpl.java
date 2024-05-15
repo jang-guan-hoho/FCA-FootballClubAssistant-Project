@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fca.model.dao.ClubDao;
 import com.fca.model.dto.Club;
@@ -45,9 +46,16 @@ public class ClubServiceImpl implements ClubService {
 		return clubDao.insertMember(map);
 	}
 
+	@Transactional
 	@Override
-	public int createClub(Club club) {
-		return clubDao.insertClub(club);
+	public int createClub(Club club, int userId) {
+		int result = clubDao.insertClub(club);
+		Map<String, Object> map = new HashMap<>();
+		map.put("clubId", club.getClubId());
+		map.put("userId", userId);
+		map.put("position", "클럽장");
+		clubDao.insertMember(map);
+		return result;
 	}
 
 	@Override

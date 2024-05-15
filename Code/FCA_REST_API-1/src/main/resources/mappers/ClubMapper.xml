@@ -24,4 +24,53 @@
 		INSERT INTO member (club_id, user_id, position)
 		VALUES (#{clubId}, #{userId}, #{position})
 	</insert>
+	
+	<insert id="insertClub" parameterType="Club">
+		INSERT INTO club (name, max_member, fee, deadline, club_img, logo, account, bank, region)
+		VALUES (#{name}, #{maxMember}, #{fee}, #{deadline}, #{clubImg}, #{logo}, #{account}, #{bank}, #{region})
+	</insert>
+	
+	<select id="selectNewClub" resultType="Club">
+		SELECT *
+		FROM club
+		ORDER BY club_id DESC
+		LIMIT 1
+	</select>
+	
+	<delete id="deleteMember" parameterType="int">
+		DELETE FROM member
+		WHERE member_id = #{memberId}
+	</delete>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE member
+		SET position = #{position}
+		WHERE member_id = #{memberId}
+	</update>
+	
+	<update id="updateClub" parameterType="Club">
+		UPDATE club
+		SET name = #{name}, max_member = #{maxMember}, fee = #{fee}, deadline = #{deadline}, club_img = #{clubImg}, logo = #{logo}, account = #{account}, bank = #{bank}, region = #{region},
+		WHERE club_id = #{clubId}
+	</update>
+	
+	<delete id="deleteClub" parameterType="int">
+		DELETE FROM club
+		WHERE club_id = #{clubId}
+	</delete>
 </mapper>
+
+<!-- 
+const club = ref({
+  name: '',
+  maxMember: 0,
+  content: '',
+  fee: 1000,
+  deadline: 15,
+  clubImg: null,
+  logo: null,
+  account: '',
+  bank: '',
+  region: '',
+});
+ -->

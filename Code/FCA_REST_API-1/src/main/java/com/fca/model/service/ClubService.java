@@ -1,6 +1,7 @@
 package com.fca.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fca.model.dto.Club;
 import com.fca.model.dto.Member;
@@ -15,7 +16,7 @@ public interface ClubService {
 
 	int joinClub(int clubId, int userId);
 
-	int createClub(Club club);
+	int createClub(Club club, int userId);
 
 	Club getNewClub();
 
@@ -26,4 +27,6 @@ public interface ClubService {
 	int updateClub(Club club);
 
 	int deleteClub(int clubId);
+
+	List<Map<String, Integer>> getClubReceipt(int clubId, int year, int month);
 }
