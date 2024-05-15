@@ -14,24 +14,24 @@
         </div>
         <div>
           <label for="clubName">클럽명:</label>
-          <input type="text" id="clubName" v-model="club.name">
+          <input type="text" id="clubName" v-model="club.name" required>
         </div>
         <div>
           <label for="maxMember">정원:</label>
-          <input type="number" id="maxMember" v-model="club.maxMember">
+          <input type="number" id="maxMember" v-model="club.maxMember" required>
         </div>
         <div>
           <label for="region">활동 지역:</label>
           <select id="region" v-model="selectedRegion" @change="updateDistricts">
             <option disabled value="">지역 선택</option>
-            <option v-for="region in koreanRegions" :key="region.id" :value="region.id">
+            <option v-for="region in koreanRegions" :key="region.id" :value="region.name">
               {{ region.name }}
             </option>
           </select>
         </div>
         <div v-if="districts.length > 0">
           <label for="district">구 선택:</label>
-          <select id="district" v-model="club.region">
+          <select id="district" v-model="regionDetail" @change="updateRegion">
             <option disabled value="">구 선택</option>
             <option v-for="district in districts" :key="district" :value="district">
               {{ district }}
@@ -39,16 +39,25 @@
           </select>
         </div>
         <div>
+          <label for="bank">은행:</label>
+          <select v-model="club.bank" id="bank">
+            <option disabled value="">은행 선택</option>
+            <option v-for="bank in banks" :key="bank.id" :value="bank.name" selected>{{bank.name}}</option>
+          </select>
+          <label for="account">계좌번호:</label>
+          <input type="number" id="account" v-model="club.account" required>
+        </div>
+        <div>
           <label for="fee">회비 금액 설정:</label>
-          <input type="number" id="fee" v-model="club.fee" min="0" step="1000" >
+          <input type="number" id="fee" v-model="club.fee" min="0" step="1000" required>
         </div>
         <div>
           <label for="deadline">회비 납부 일:</label>
-          <input type="number" id="deadline" v-model="club.deadline" min="1" max="28">
+          <input type="number" id="deadline" v-model="club.deadline" min="1" max="28" required>
         </div>
         <div>
-          <label for="description">클럽 설명:</label>
-          <textarea id="description" v-model="club.description" cols="30" rows="10"></textarea>
+          <label for="content">클럽 설명:</label>
+          <textarea id="content" v-model="club.content" cols="30" rows="10" required></textarea>
         </div>
         <div>
           <button @click="createClub">등록</button>
@@ -62,13 +71,15 @@ import { ref, watch } from 'vue';
 
 const club = ref({
   name: '',
-  maxMember: null,
-  region: '',
-  description: '',
-  logo: null,
+  maxMember: 0,
+  content: '',
+  fee: 1000,
+  deadline: 15,
   clubImg: null,
-  fee: null,
-  deadline: null
+  logo: null,
+  account: '',
+  bank: '',
+  region: '',
 });
 
 const previewLogo = ref('');
@@ -92,7 +103,16 @@ function handleClubImgChange(event) {
 
 const selectedRegion = ref('');
 const districts = ref([]);
-
+const regionDetail = ref('');
+const updateRegion = function(){
+  club.value.region = selectedRegion.value +" "+ regionDetail.value 
+}
+const banks = ref([
+  {id:0, name:'기업'},
+  {id:1, name:'국민'},
+  {id:2, name:'신한'},
+  {id:3, name:'하나'}
+])
 const koreanRegions = ref([
 { id: 'seoul', name: '서울특별시', districts: ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"] },
 { id: 'incheon', name: '인천광역시', districts: ["계양구", "남동구", "동구", "미추홀구", "부평구", "서구", "연수구", "중구"] },
@@ -114,7 +134,7 @@ const koreanRegions = ref([
 ]);
 
 function updateDistricts() {
-  const region = koreanRegions.value.find(r => r.id === selectedRegion.value);
+  const region = koreanRegions.value.find(r => r.name === selectedRegion.value);
   districts.value = region ? region.districts : [];
 }
 watch(() => club.value.deadline, (newValue, oldValue) => {
@@ -126,7 +146,7 @@ watch(() => club.value.deadline, (newValue, oldValue) => {
 });
 function createClub() {
   console.log('Submitted Club Data:', club.value);
-  // Handle the submission logic here, such as sending data to a server
+  // 모임 상세 페이지로 이동 필요
 }
 </script>
 <!-- const koreanRegions = ref([

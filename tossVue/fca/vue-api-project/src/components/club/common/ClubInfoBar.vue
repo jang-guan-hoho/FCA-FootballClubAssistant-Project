@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    clubinfo
   </div>
 </template>
 

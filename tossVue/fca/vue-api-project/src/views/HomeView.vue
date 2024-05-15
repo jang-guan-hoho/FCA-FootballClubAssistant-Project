@@ -11,5 +11,7 @@
 </script>
 
 <style scoped>
-
+div{
+  background-image: url('/tossVue/fca/vue-api-project/src/assets/img/background.PNG');
+}
 </style>
