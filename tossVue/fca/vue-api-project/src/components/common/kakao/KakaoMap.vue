@@ -1,10 +1,18 @@
 <template>
   <div>
-    <div id="map"></div>
-    <button @click="initMap">내위치</button>
+    <div style="visibility: hidden;" id="map"></div>
+    <div>
+      <div>{{ address.name }}</div>
+      <button @click="locateAddress">지도 확인</button>
+      <div>{{ address.address }}</div>
+      <a :href="address.url" target="_blank">{{ address.url }}</a>
+       <!-- 주소 검색 버튼 추가 -->
+    </div>
+    <!-- <button @click="initMap">내위치</button> -->
+    <form>
     <input v-model="searchKey" placeholder="주소 검색" required>
     <button @click="search">검색</button>
-    <button @click="locateAddress">주소 위치 확인</button> <!-- 주소 검색 버튼 추가 -->
+    </form>
     <div v-show="searchResult.length > 0">
       <table>
         <tr>
@@ -24,12 +32,18 @@
 import { useScheduleStore } from '@/stores/schedule';
 import { onMounted, ref, toRaw, computed } from 'vue';
 
+
+
+
+
+
 const store = useScheduleStore();
 let map = null;
 const x = ref(33.450701)
 const y = ref(126.570667)
 // 지도 초기화 함수
 const initMap = function () {
+  
   let myCenter = new kakao.maps.LatLng(x.value, y.value);
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -54,26 +68,12 @@ const initMap = function () {
   const zoomControl = new kakao.maps.ZoomControl();
   map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 };
-onMounted(() => {
-  // 여기에 좌표값 받아오기 
-  // kakao 객체가 이미 로드된 경우, 바로 지도 초기화 함수를 호출
-  if (window.kakao && window.kakao.maps) {
-    kakao.maps.load(initMap);
-  } else {
-    // kakao 객체가 로드되지 않은 경우, 스크립트를 동적으로 로드
-    const script = document.createElement('script');
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=18ec83912bcf322b790dd648193570e8&libraries=services`;
-    document.head.appendChild(script);
-    script.onload = () => {
-      kakao.maps.load(initMap);
-    };
-  }
-});
 
+const address= ref({})
 // 주소로 좌표를 검색하고 마커 표시하는 함수
 const locateAddress = function(){
   const geocoder = new kakao.maps.services.Geocoder();
-  geocoder.addressSearch('화랑로 51길 78', function(result, status) {
+  geocoder.addressSearch(address.value.address, function(result, status) {
     if (status === kakao.maps.services.Status.OK) {
       const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
       const marker = new kakao.maps.Marker({
@@ -81,12 +81,13 @@ const locateAddress = function(){
         position: coords
       });
       const infowindow = new kakao.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:6px 0;">약속 장소</div>'
+        content: `<div style="width:150px;text-align:center;padding:6px 0;">${address.value.name}</div>`
       });
       infowindow.open(map, marker);
-      map.setCenter(coords);
+      map.setCenter(coords); 
     }
   });
+  document.getElementById('map').style.visibility="visible"
 }
 
 
@@ -108,6 +109,25 @@ const search = function(){
 function generateMapLink(id) {
   return `https://map.kakao.com/link/map/${id}`;
 }
+
+// 지도 생성 유무
+onMounted(() => {
+  // 여기에 좌표값 받아오기 
+  // kakao 객체가 이미 로드된 경우, 바로 지도 초기화 함수를 호출
+  if (window.kakao && window.kakao.maps) {
+    kakao.maps.load(initMap);
+  } else {
+    // kakao 객체가 로드되지 않은 경우, 스크립트를 동적으로 로드
+    const script = document.createElement('script');
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=18ec83912bcf322b790dd648193570e8&libraries=services`;
+    document.head.appendChild(script);
+    script.onload = () => {
+      kakao.maps.load(initMap);
+    };
+  }
+  address.value = store.place
+});
+
 </script>
 
 <style scoped>

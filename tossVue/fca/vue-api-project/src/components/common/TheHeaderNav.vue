@@ -2,8 +2,8 @@
     <div id="container">
         <header>
             <nav>
-                <RouterLink to="/">logo</RouterLink> |
-                <RouterLink to="/kakao">Kakao</RouterLink> |
+                <RouterLink to="/kakao">logo</RouterLink> |
+                <RouterLink :to="{ name: 'clubCreate' }">club</RouterLink> |
                 <RouterLink :to="{ name: 'boardList' }">BoardList</RouterLink> |
                 <RouterLink :to="{ name: 'boardCreate' }">BoardCreate</RouterLink>
             </nav>
