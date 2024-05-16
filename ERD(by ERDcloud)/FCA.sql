@@ -39,9 +39,12 @@ CREATE TABLE `place` (
 
 CREATE TABLE `schedule` (
 	`schedule_id` INT NOT NULL AUTO_INCREMENT,
-	`date` TIMESTAMP NOT NULL,
+    `title` VARCHAR(40) NOT NULL,
+	`date` DATE NOT NULL,
+    `time` VARCHAR(20) NOT NULL,
 	`match` INT NULL,
 	`equipment` VARCHAR(40) NULL,
+    `cost` INT NULL DEFAULT 0,
 	`place_id` INT NOT NULL,
 	`club_id` INT NOT NULL,
 	PRIMARY KEY (`schedule_id`),
@@ -85,6 +88,7 @@ CREATE TABLE `payment` (
 	`payment_id` INT NOT NULL AUTO_INCREMENT,
 	`pay_date` DATE NOT NULL,
 	`status` BOOLEAN NOT NULL,
+    `price` INT NOT NULL,
 	`comment` VARCHAR(200) NOT NULL,
 	`club_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
