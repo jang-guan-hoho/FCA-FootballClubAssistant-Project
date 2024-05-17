@@ -6,8 +6,27 @@ import router from '@/router'
 const REST_BOARD_API = `http://localhost:8080/api-board/board`
 
 export const useClubStore = defineStore('club', () => {
-const club = ref({})
-const clubMember = ref([])
+const club = ref({
+  clubId:1
+})
+const clubMember = ref([
+  // 더미 데이터
+  {
+    userId: 1,
+    name: "김철수",
+    profile: "https://example.com/profiles/kim.jpg"
+  },
+  {
+    userId: 2,
+    name: "이영희",
+    profile: "https://example.com/profiles/lee.jpg"
+  },
+  {
+    userId: 3,
+    name: "박지민",
+    profile: "https://example.com/profiles/park.jpg"
+  }
+])
 
   const createClub = function (club) {
     axios({
@@ -50,14 +69,23 @@ const clubMember = ref([])
   }
 
 
+  const userList = ref([])
+  const getUserList = function(userIds) {
+    // clubMember 배열에서 userId가 일치하는 첫 번째 사용자 객체를 찾습니다.
+    const foundUser = clubMember.value.find(user => user.userId === userIds);
+    console.log(foundUser)
+    
+    // 찾은 사용자가 있으면, userList에 추가합니다.
+    if (foundUser) {
+      userList.value.push(foundUser);
+    } else {
+      console.log("No user found with ID:", userIds);
+    }
+  }
+  
 
 
 
 
-
-
-
-
-
-  return { createClub, clubMember, getClubMember, club, getClub, updateClub}
+  return { createClub, clubMember, getClubMember, club, getClub, updateClub, userList, getUserList}
 })

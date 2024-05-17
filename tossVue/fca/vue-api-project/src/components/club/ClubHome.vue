@@ -10,6 +10,7 @@
                 <div>{{ member.name }}</div>
             </div>
         </section>
+        <RouterView />
     </div>
 </template>
 

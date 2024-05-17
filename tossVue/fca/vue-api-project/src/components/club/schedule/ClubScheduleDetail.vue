@@ -1,57 +1,109 @@
 <template>
-    <div>
-      <a>Club Schedule Detail</a>
-      <ClubInfoBar />
-      <KakaoMap />
-      <!-- 오늘 날짜 일정 표시 -->
-      <div v-if="todaySchedule">
-        <div>
-        <h3>Today's Schedule:</h3>
-        <p>시간: {{ todaySchedule.date }}</p>/
-        <p>장비: {{ todaySchedule.equipment }}</p>/
-        <p>{{ todaySchedule.match }} / {{ todaySchedule.match }}</p>
-        </div>
-        <div>
-            <butto @click="">참여신청</butto>
-        </div>
-        <div v-for="participant in participants" :key="participant.id">
-            <div></div>
-        </div>
-    </div>
-      <div v-else>
-        <p>No events for today.</p>
+  <div>
+    <a>Club Schedule Detail</a>
+    <ClubInfoBar />
+    <div v-if="sstore.schedule.scheduleId">
+      <div>
+        <h3>오늘 일정</h3>
+        <KakaoMap />
+        <p>시간: {{ sstore.schedule.time }}</p>
+        <p>장비: {{ sstore.schedule.equipment }}</p>
+        <p>모집인원: {{ sstore.schedule.match }}명</p>
+        <p>현재인원: {{ sstore.participant.length }}명</p>
+      </div>
+      <div>
+        <button @click="joinSchedule">참여신청</button>
+      </div>
+      <div v-for="participant in cstore.userList" :key="participant.userId">
+        <div>{{ participant.profile }}</div>
+        <div>{{ participant.name }}</div>
       </div>
     </div>
-  </template>
-  
-  <script setup>
-  import { useScheduleStore } from '@/stores/schedule';
-  import ClubInfoBar from '../common/ClubInfoBar.vue';
-  import { ref, onMounted } from 'vue';
-  import KakaoMap from '@/components/common/kakao/KakaoMap.vue'
-  // 스토어 사용
-  const store = useScheduleStore();
-  
-  
-  // 오늘 날짜의 일정을 찾아 저장할 ref
-  const todaySchedule = ref(null);
-  
-  // 오늘 날짜 구하기
-  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD 형식
-  
-  onMounted(() => {
-    store.getSchedule(today);
-    todaySchedule.value =store.schedule;
-    store.getParticipant(store.schedule.scheduleId);
-    participants.value = store.participant;
-  });
+    <table>
+      <tr>
+        <th>항목</th>
+        <th>금액</th>
+      </tr>
+    <tr v-for="receipt in sstore.receipt" :key="receipt.receiptId">
+      <td>{{ receipt.item }}</td>
+      <td>{{ receipt.price }}원</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><h5>Total:{{ totalAmount }}원</h5></td>
+    </tr>
+  </table>
+</div>
+</template>
 
-  const participants = ref([])
+<script setup>
+import { ref, onMounted, watch, computed } from 'vue';
+import { useScheduleStore } from '@/stores/schedule';
+import ClubInfoBar from '../common/ClubInfoBar.vue';
+import KakaoMap from '@/components/common/kakao/KakaoMap.vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useClubStore } from '@/stores/club';
+import axios from 'axios';
+
+const route = useRoute();
+const sstore = useScheduleStore();
+const cstore = useClubStore();
+const router = useRouter();
+
+// 일정과 참여자 정보를 불러오는 함수
+async function loadScheduleDetails() {
+  console.log("Route date:", route.params.date);
+
+  // 일정 불러오기
+  sstore.getSchedule(route.params.date);
+  console.log("Schedule loaded:", sstore.schedule);
+
+  if (sstore.schedule && sstore.schedule.scheduleId) {
+    // 참여자 유저Id 불러오기
+    sstore.getParticipant(sstore.schedule.scheduleId);
 
 
-  </script>
-  
-  <style scoped>
+    const userIds = sstore.participant.map(participant => participant.userId);
+    userIds.map(userId => cstore.getUserList(userId)); // getUser는 userId로 사용자 정보를 불러오는 함수입니다.
+  }
 
-  </style>
-  
+  sstore.getPlace(sstore.schedule.placeId);
+
+  sstore.getReceipt(sstore.schedule.scheduleId);
+  console.log(sstore.receipt)
+}
+
+onMounted(() => {
+  loadScheduleDetails();
+});
+
+// 스케줄의 반응적 감시
+watch(() => sstore.schedule, (newSchedule) => {
+  console.log("Schedule updated:", newSchedule);
+}, { immediate: true });
+
+
+const participant = ref({})
+// 일정 참가
+const joinSchedule=function(){
+  participant.value.userId=null;
+  participant.value.scheduleId=sstore.schedule.scheduleId;
+  // 클럽아이디, 유저id(user pinia에 저장되어 있다고 생각) 넘김 메소드 생성
+  axios.post(`http://localhost:8080/club/${cstore.clubId}/schedule/${sstore.schedule.scheduleId}/participant`,participant)
+        .then(() => {
+            router.push({ name: 'clubList' })
+        })
+        .catch(err =>{
+          console.log(err)
+        })
+}
+
+const totalAmount = computed(() => {
+  return sstore.receipt.reduce((sum, receipt) => sum + receipt.price, 0);
+});
+</script>
+
+
+
+<style scoped>
+</style>

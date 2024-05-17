@@ -13,6 +13,7 @@ import ClubHome from '@/components/club/ClubHome.vue'
 import ClubScheduleDetail from '@/components/club/schedule/ClubScheduleDetail.vue'
 import ClubScheduleList from '@/components/club/schedule/ClubScheduleList.vue'
 import ClubScheduleView from '@/views/ClubScheduleView.vue'
+import ClubScheduleDetailReceipt from '@/components/club/schedule/ClubScheduleDetailReceipt.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,37 +24,45 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/clubCreate',
+      name: 'clubCreate',
+      component: ClubCreate,
+    },
+    {
       path: '/club',
       name: 'club',
       component: ClubView,
       children: [
         {
-          path: '',
-          name: 'clubCreate',
-          component: ClubCreate,
-        },
-        {
-          path: 'home',
+          path: ':clubId',
           name: 'clubHome',
           component: ClubHome,
-        },
-        {
-          path: 'schedule',
-          name: 'clubSchedule',
-          component: ClubScheduleView,
           children:[
             {
-              path: '',
-          name: 'clubScheduleList',
-          component: ClubScheduleList,
-            }, 
-            {
-              path: ':date',
-              name: 'clubScheduleDetail',
-              component: ClubScheduleDetail,
+              path: 'schedule',
+              name: 'clubSchedule',
+              component: ClubScheduleView,
+              children:[
+                {
+                  path: '',
+              name: 'clubScheduleList',
+              component: ClubScheduleList,
+                }, 
+                {
+                  path: ':date',
+                  name: 'clubScheduleDetail',
+                  component: ClubScheduleDetail,
+                },
+                {
+                  path: 'receipt',
+                  name: 'clubScheduleDetailReceipt',
+                  component: ClubScheduleDetailReceipt,
+                }, 
+              ]
             },
           ]
         },
+       
         
       ]
     },
@@ -78,7 +87,7 @@ const router = createRouter({
           component: BoardUpdate
         },
         {
-          path: ':id',
+          path: '',
           name: 'boardDetail',
           component: BoardDetail
         },

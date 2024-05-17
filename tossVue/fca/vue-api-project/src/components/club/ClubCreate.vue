@@ -1,5 +1,6 @@
 <template>
     <div>
+      <form>
       <fieldset>
         <legend>클럽 생성</legend>
         <div>
@@ -60,18 +61,19 @@
           <textarea id="content" v-model="club.content" cols="30" rows="10" required></textarea>
         </div>
         <div>
-          <button @click="createClub">등록</button>
+          <button @click="createClub" :disabled="!isFormValid">등록</button>
         </div>
       </fieldset>
+    </form>
     </div>
   </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 
 const club = ref({
   name: '',
-  maxMember: 0,
+  maxMember: 1,
   content: '',
   fee: 1000,
   deadline: 15,
@@ -92,7 +94,9 @@ function handleLogoChange(event) {
     previewLogo.value = URL.createObjectURL(file);
   }
 }
-
+const isFormValid = computed(() => {
+  return club.value.bank.trim() !== '' &&club.value.content.trim() !== '' &&club.value.account !== '' &&club.value.name.trim() !== '' && club.value.name !== null&& club.value.maxMember !== null&& club.value.region !== null&& club.value.content !== null&& club.value.account !== null;
+});
 function handleClubImgChange(event) {
   const file = event.target.files[0];
   if (file) {
