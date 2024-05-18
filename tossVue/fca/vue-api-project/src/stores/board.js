@@ -6,49 +6,89 @@ import router from '@/router'
 const REST_BOARD_API = `http://localhost:8080/api-board/board`
 
 export const useBoardStore = defineStore('board', () => {
+  const board = ref( {
+    boardId: 1,
+    title: '첫 번째 게시물',
+    writer: '작성자1',
+    content: '첫 번째 게시물의 내용입니다.',
+    img: 'https://via.placeholder.com/150',
+    video: 'https://www.example.com/video1.mp4',
+    category: true,
+    viewCnt: 123,
+    date: '2024-5-17 09:00:00'
+  })
+  const boardList = ref([
+    {
+      boardId: 1,
+      title: '첫 번째 게시물',
+      writer: '작성자1',
+      content: '첫 번째 게시물의 내용입니다.',
+      img: 'https://via.placeholder.com/150',
+      video: null,
+      category: true,
+      viewCnt: 123,
+      date: '2024-5-17 09:00:00'
+    },
+    {
+      boardId: 2,
+      title: '두 번째 게시물',
+      writer: '작성자2',
+      content: '두 번째 게시물의 내용입니다.',
+      img: 'https://via.placeholder.com/150',
+      video: 'https://www.example.com/video2.mp4',
+      category: false,
+      viewCnt: 456,
+      date: '2024-5-18 10:00:00'
+    },
+    {
+      boardId: 3,
+      title: '세 번째 게시물',
+      writer: '작성자3',
+      content: '세 번째 게시물의 내용입니다.',
+      img: 'https://via.placeholder.com/150',
+      video: 'https://www.example.com/video3.mp4',
+      category: true,
+      viewCnt: 789,
+      date: '2024-5-19 11:00:00'
+    }
+  ]);
 
+  const createBoard = function (boardData) {
+    const formData = new FormData();
+    Object.keys(boardData).forEach(key => {
+        if (boardData[key] instanceof File) {
+            formData.append(key, boardData[key], boardData[key].name);
+        } else {
+            formData.append(key, boardData[key]);
+        }
+    });
 
-  const createBoard = function (board) {
-    axios({
+    return axios({
       url: REST_BOARD_API,
       method: 'POST',
-      // 아래 작업하지 않아도 그냥 JSON 형태로 Content-type을 결정해서 보내버림
-      // headers: {
-      //   "Content-Type": "applcation/json"
-      // },
-      data: board
-    })
-      .then(() => {
+      data: formData
+    }).then(response => {
         router.push({name: 'boardList'})
-      })
-      .catch((err) => {
-      console.log(err)
-    })
-  }
+    }).catch(err => {
+        console.error('Error creating board:', err);
+    });
+}
 
-  const boardList = ref([])
-  const getBoardList = function () {
-    axios.get(REST_BOARD_API)
+    const getBoardList = function (clubId) {
+    axios.get(`${REST_BOARD_API}/${clubId}`)
       .then((response) => {
       boardList.value = response.data
     })
   }
 
-  const board = ref({})
 
-  const getBoard = function (id) {
-    axios.get(`${REST_BOARD_API}/${id}`)
+  const getBoard = function (boardId) {
+    axios.get(`${REST_BOARD_API}/${boardId}`)
       .then((response) => {
       board.value = response.data
     })
   }
 
-  const updateBoard = function () {
-    axios.put(REST_BOARD_API, board.value)
-      .then(() => {
-      router.push({name: 'boardList'})
-    })
-  }
 
   const searchBoardList = function (searchCondition) {
     axios.get(REST_BOARD_API, {
@@ -67,6 +107,5 @@ export const useBoardStore = defineStore('board', () => {
 
 
 
-
-  return { createBoard, boardList, getBoardList, board, getBoard, updateBoard, searchBoardList}
+  return { createBoard, boardList, getBoardList, board, getBoard, searchBoardList}
 })

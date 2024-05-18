@@ -1,7 +1,7 @@
 <template>
     <div>
       <a>Club Schedule List</a>
-      <ClubInfoBar />
+      
       <!-- 캘린더 삽입 -->
       <FullCalendar :options="calendarOptions" />
       </div>

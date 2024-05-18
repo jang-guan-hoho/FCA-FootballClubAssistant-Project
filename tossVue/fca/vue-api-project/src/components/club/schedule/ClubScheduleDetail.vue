@@ -1,7 +1,6 @@
 <template>
   <div>
     <a>Club Schedule Detail</a>
-    <ClubInfoBar />
     <div v-if="sstore.schedule.scheduleId">
       <div>
         <h3>오늘 일정</h3>
@@ -18,6 +17,7 @@
         <div>{{ participant.profile }}</div>
         <div>{{ participant.name }}</div>
       </div>
+      <button @click="deleteSchedule">일정 삭제</button>
     </div>
     <table>
       <tr>
@@ -27,12 +27,18 @@
     <tr v-for="receipt in sstore.receipt" :key="receipt.receiptId">
       <td>{{ receipt.item }}</td>
       <td>{{ receipt.price }}원</td>
+      <button @click="deleteReceipt(receipt.receiptId)">삭제</button>
     </tr>
     <tr>
       <td></td>
       <td><h5>Total:{{ totalAmount }}원</h5></td>
     </tr>
   </table>
+  <form>
+    <input type="text" :value="receipt.item">
+    <input type="number" :value="receipt.price">
+    <button @click="createReceipt">추가</button>
+  </form>
 </div>
 </template>
 
@@ -49,7 +55,23 @@ const route = useRoute();
 const sstore = useScheduleStore();
 const cstore = useClubStore();
 const router = useRouter();
+const receipt= ref({
+  scheduleId:sstore.schedule.scheduleId,
+  item:'',
+  price:'',
+})
+const receipts=ref([])
+const createReceipt = function(){
+  sstore.receipts.push(receipt.value);
+  sstore.createReceipt(receipts.value);
+}
 
+const deleteReceipt = function (receipt) {//수정
+    axios.delete(`http://localhost:8080/api-board/board/${receipt}`)
+        .then(() => {
+             router.push({name: 'clubScheduleDetail', params:{date:schedule.date}})
+        })
+}
 // 일정과 참여자 정보를 불러오는 함수
 async function loadScheduleDetails() {
   console.log("Route date:", route.params.date);
@@ -97,6 +119,17 @@ const joinSchedule=function(){
           console.log(err)
         })
 }
+
+
+const deleteSchedule = function () {
+  console.log(sstore.schedule.scheduleId)
+    axios.delete(`http://localhost:8080/api-board/board/${sstore.schedule.scheduleId}`)
+        .then(() => {
+            router.push({ name: 'clubScheduleList' })
+        })
+}
+
+
 
 const totalAmount = computed(() => {
   return sstore.receipt.reduce((sum, receipt) => sum + receipt.price, 0);
