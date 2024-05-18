@@ -2,10 +2,10 @@
     <div id="container">
         <header>
             <nav>
-                <RouterLink :to="{ name: 'clubHome', params:{clubId:store.club.clubId}}">홈</RouterLink> |
-                <RouterLink :to="{ name: 'clubScheduleList' }">일정</RouterLink> |
-                <RouterLink :to="{ name: '' }">게시판</RouterLink> |
-                <RouterLink :to="{ name: 'clubScheduleDetailReceipt'}">회비사용내역</RouterLink>
+                <RouterLink :to="{ name: 'clubHome', params: { clubId: clubId } }">홈</RouterLink> |
+                <RouterLink :to="{ name: 'clubScheduleList', params: { clubId: clubId } }">일정</RouterLink> |
+                <RouterLink :to="{ name: 'boardList', params: { clubId: clubId }}">게시판</RouterLink> |
+                <RouterLink :to="{ name: 'clubScheduleDetailReceipt', params: { clubId: clubId, receiptDate: today} }">월별 회비</RouterLink> 
             </nav>
         </header>
     </div>
@@ -13,8 +13,24 @@
 
 <script setup>
 import { useClubStore } from '@/stores/club';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+const route = useRoute()
 const store = useClubStore()
 
+const currentDate = new Date();
+const props = defineProps({
+  clubId: {
+    type: String,
+    required: true
+  }
+});
+onMounted(()=>{
+
+    store.getClub(props.clubId)
+})
+// 날짜와 시간을 문자열로 포맷팅
+const today = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}`;
 </script>
 
 <style scoped>

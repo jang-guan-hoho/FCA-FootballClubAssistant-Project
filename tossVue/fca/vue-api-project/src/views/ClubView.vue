@@ -1,13 +1,17 @@
 <template>
     <div>
         <h2>ClubView</h2>
-        <ClubNavBar />
+        <RouterLink :to="{ name: 'myClubList' }">마이 클럽</RouterLink> |
+        <RouterLink :to="{ name: 'clubList'}">클럽 리스트</RouterLink> 
         <RouterView />
     </div>
 </template>
 
 <script setup>
-    import ClubNavBar from "@/components/club/common/ClubNavBar.vue"
+import { useClubStore } from '@/stores/club';
+
+const store = useClubStore()
+
 </script>
 
 <style scoped></style>

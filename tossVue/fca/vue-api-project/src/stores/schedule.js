@@ -168,6 +168,45 @@ export const useScheduleStore = defineStore('schedule', () => {
     
   }
 
+  const createReceipt = function(scheduleId,receipt){
+    axios.post(`${REST_RECEIPT_API}/${scheduleId}`,receipt)
+    .then(() => {
+      router.push({name: 'clubScheduleDetail', params:{date:schedule.date}})
+    })
+  }
 
-  return { receipt, getReceipt, schedule, scheduleList, createSchedule, getSchedule, getScheduleList,place, getPlace, participant, getParticipant}
+
+
+
+
+  const receiptMap= ref(new Map())
+  const getReceiptMap = function(recdate) {
+    axios.get(`${REST_RECEITMAP_API}/${recdate}`)
+    .then((response) => {
+      const recs = response.data;
+      // Map 객체 초기화
+      receiptMap.value.clear();
+      // 데이터를 Map에 저장
+      recs.forEach(rec => {
+        receiptMap.value.set(rec.id, rec);
+      });
+    })
+    .catch((err) => {
+      console.error('Error fetching receipts:', err);
+    });
+      router.push({name: 'clubScheduleDetailReceipt', params:{date:schedule.date, receiptDate: recdate}})
+  }
+
+
+
+
+
+
+
+  const isScheduleIn = function() {
+    // getScheduleList();
+    // 클럽 객체가 비어있는지 확인
+    return scheduleList.value && Object.keys(scheduleList.value).length > 0;
+  }
+  return { receiptMap,getReceiptMap, receipts, receipt, getReceipt, schedule, scheduleList, createSchedule, getSchedule, getScheduleList,place, getPlace, participant, getParticipant, isScheduleIn, createReceipt}
 })
