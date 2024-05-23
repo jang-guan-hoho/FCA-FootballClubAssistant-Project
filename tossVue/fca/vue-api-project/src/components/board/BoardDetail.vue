@@ -7,9 +7,18 @@
         <div>{{ store.board.regDate }}</div>
         <div>{{ store.board.viewCnt }}</div>
         <div>{{ store.board.content }}</div>
+        <div v-if="store.board.img">
+            <img :src="store.board.img" alt="게시글 이미지">
+        </div>
+        <div v-if="store.board.video">
+            <video controls>
+                <source :src="store.board.video" type="video/mp4">
+            </video>
+        </div>
 
         <button @click="deleteBoard">삭제</button>
         <button @click="updateBoard">수정</button>
+        <button @click="goBoardList">목록</button>
     </div>
 </template>
 
@@ -25,11 +34,13 @@ const route = useRoute();
 const router = useRouter();
 onMounted(() => {
     //게시글 번호 어디에 있나
-    store.getBoard(route.params.id)
+    store.getBoard(route.params.boardId)
 })
-
+const goBoardList = function() {
+    router.push({name:'boardList'})
+}
 const deleteBoard = function () {
-    axios.delete(`http://localhost:8080/api-board/board/${route.params.id}`)
+    axios.delete(`http://localhost:8080/api-board/board/${route.params.boardId}`)
         .then(() => {
             router.push({ name: 'boardList' })
         })

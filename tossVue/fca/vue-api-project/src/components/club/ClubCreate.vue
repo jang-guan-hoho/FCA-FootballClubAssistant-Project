@@ -69,7 +69,19 @@
   </template>
 
 <script setup>
+import { useClubStore } from '@/stores/club';
 import { ref, watch, computed } from 'vue';
+import { useRouter} from 'vue-router'
+
+const store = useClubStore();
+const router= useRouter();
+
+function createClub() {
+  // store.createClub(club.value);
+  console.log('Submitted Club Data:', club.value);
+  // 모임 상세 페이지로 이동 필요
+  router.push({name:'myClubList'})
+}
 
 const club = ref({
   name: '',
@@ -148,10 +160,7 @@ watch(() => club.value.deadline, (newValue, oldValue) => {
     club.value.deadline = 28;
   }
 });
-function createClub() {
-  console.log('Submitted Club Data:', club.value);
-  // 모임 상세 페이지로 이동 필요
-}
+
 </script>
 <!-- const koreanRegions = ref([
 { id: 'seoul', name: '서울특별시', districts: ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"] },

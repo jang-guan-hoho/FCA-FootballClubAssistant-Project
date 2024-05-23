@@ -2,16 +2,22 @@
     <div id="container">
         <header>
             <nav>
-                <RouterLink to="/kakao">logo</RouterLink> |
-                <RouterLink :to="{ name: 'clubCreate' }">club</RouterLink> |
-                <RouterLink :to="{ name: 'boardList' }">BoardList</RouterLink> |
-                <RouterLink :to="{ name: 'boardCreate' }">BoardCreate</RouterLink>
+                <RouterLink to="/">logo</RouterLink> |
+                <RouterLink :to="{ name: 'clubCreate' }">clubCrete</RouterLink> |
+                <RouterLink :to="{ name: 'club'}">clubHome</RouterLink> 
             </nav>
+            <RouterLink v-if="loginStore.accessToken === ''" to="/login">Login</RouterLink>
+             <button v-else @click="logout">Logout</button>
+             <RouterLink :to="{ name: 'signUp'}">회원가입</RouterLink> 
+
         </header>
     </div>
 </template>
 
 <script setup>
+import { useClubStore } from '@/stores/club';
+import { useLoginStore } from '@/stores/login';
+const loginStore = useLoginStore();
 </script>
 
 <style scoped>
