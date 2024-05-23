@@ -19,10 +19,16 @@ const router = useRouter();
 const clubFee = ref(1000);
 
 const openInNewWindow = () => {
+<<<<<<< HEAD
   console.log(store.club.name)
   const url = router.resolve({
     name: 'pay',
     params: { clubId: store.club.clubId, clubFee: clubFee.value, name: store.club.name }
+=======
+  const url = router.resolve({
+    name: 'pay',
+    params: { clubId: store.club.clubId, clubFee: clubFee.value }
+>>>>>>> 081c1298970ff3000fab8e41f38a0881c0194b06
   }).href;
   window.open(url, '_blank');
 };

@@ -75,7 +75,11 @@ const router = createRouter({
               component: ClubHome,
             },
             {
+<<<<<<< HEAD
               path: 'pay/:clubFee/:name',
+=======
+              path: 'pay/:clubFee',
+>>>>>>> 081c1298970ff3000fab8e41f38a0881c0194b06
               name: 'pay',
               component: () => import('../views/CheckoutView.vue')
             },
